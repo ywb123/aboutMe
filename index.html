@@ -1,6 +1,80 @@
 <html>
-<head></head>
+<head>
+<script type="text/javascript" src="js/common/jquery-1.8.0.min.js"></script>
+<script type="text/javascript">
+var distancex=1000;
+var distancey=600;
+$(document).ready(function(){
+	go('weiboDiv','+','+',3000);
+	go('hupuDiv','+','+',3000);
+	go('zhihuDiv','+','+',3000);
+	
+	go('githubDiv','+','+',3000);
+	go('resumeDiv','+','+',3000);
+	go('indexDiv','+','+',3000);
+	$('.header_one_div').hover(function(){
+		$(this).stop(true);
+	},function(){
+		go($(this).attr('id'),'+','+',3000);
+	});
+});
+function go(id,zfx,zfy,time){
+	var x,ox,y,oy;
+	if(zfx=='+'){
+		ox='+';
+		x=Math.random()*distancex;
+	}else if(zfx=='-'){
+		ox='+';
+		x=0;
+	}
+	if(zfy=='+'){
+		oy='+';
+		y=Math.random()*distancey;
+	}else if(zfy=='-'){
+		oy='+';
+		y=0;
+	}
+	$('#'+id).animate(
+		{left: zfx+x+'px',top:zfy+y+'px'}, 
+		time,
+		'linear',
+		function(){
+			go(id,ox,oy,3000);
+		}
+	);
+}
+</script>
+<style type="text/css">
+.header_one_div{
+	position: absolute;
+}
+.header_one_div a{
+	display:block;
+	margin:5px 3px;
+    background-color: #999999;
+	width:100px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	color:#FFF;
+	text-decoration: none;
+	border-radius:50px/25px;
+}
+.header_one_div a:hover{
+	background-color:#666666;
+}
+</style>
+</head>
 <body>
-	<div>hello,尬ers</div>
+	<div id="main">
+		<div id="header">
+			<div id="weiboDiv" class="header_one_div"><a href="http://weibo.com/2686459443/profile" target="_blank">weibo</a></div>
+			<div id="zhihuDiv" class="header_one_div"><a href="https://www.zhihu.com/people/yuwenbin369" target="_blank">zhihu</a></div>
+			<div id="hupuDiv" class="header_one_div"><a href="https://my.hupu.com/yuwb" target="_blank">hupu</a></div>
+			<div id="githubDiv" class="header_one_div"><a href="https://github.com/ywb123" target="_blank">github</a></div>
+			<div id="resumeDiv" class="header_one_div"><a href="https://ywb123.github.io/aboutMe/me/resume.html" target="_blank">resume</a></div>
+			<div id="indexDiv" class="header_one_div"><a href="https://ywb123.github.io/aboutMe/index.html" target="_blank">index</a></div>
+		</div>
+	</div>
 </body>
 </html>
