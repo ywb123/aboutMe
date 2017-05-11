@@ -6,6 +6,8 @@
 var distancex=1000;
 var distancey=600;
 $(document).ready(function(){
+
+	$('.header_one_div').css({left:Math.random()*distancex+'px',top:Math.random()*distancey+'px'});
 	go('weiboDiv','+','+',3000);
 	go('hupuDiv','+','+',3000);
 	go('zhihuDiv','+','+',3000);
