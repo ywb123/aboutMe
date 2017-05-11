@@ -1,6 +1,7 @@
 <html>
 <head>
 <script type="text/javascript" src="js/common/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/common/jquery.color.js"></script>
 <script type="text/javascript">
 var distancex=1000;
 var distancey=600;
@@ -17,7 +18,34 @@ $(document).ready(function(){
 	},function(){
 		go($(this).attr('id'),'+','+',3000);
 	});
+	
+	colorChange('body','#000',10000);
+	
+	colorChange('#weiboDiv a','#F00',10000);
+	colorChange('#hupuDiv a','#0F0',10000);
+	colorChange('#zhihuDiv a','#00F',10000);
+	
+	colorChange('#githubDiv a','#F00',10000);
+	colorChange('#resumeDiv a','#0F0',10000);
+	colorChange('#indexDiv a','#00F',10000);
 });
+function colorChange(obj,color,time){
+	var goColor;
+	if(color=='#FFF'){
+		goColor='#F00';
+	}else if(color=='#F00'){
+		goColor='#0F0';
+	}else if(color=='#0F0'){
+		goColor='#00F';
+	}else if(color=='#00F'){
+		goColor='#000';
+	}else{
+		goColor='#FFF';
+	}
+	$(obj+'').animate({backgroundColor:color},time,'linear',function(){
+		colorChange(obj,goColor,time);
+	});
+}
 function go(id,zfx,zfy,time){
 	var x,ox,y,oy;
 	if(zfx=='+'){
