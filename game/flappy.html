@@ -30,7 +30,7 @@ function circle(ctx,i){
 }
 
 function clear(ctx,i){
-	ctx.fillStyle="#cff";
+	ctx.fillStyle="#333";
 	ctx.fillRect(0,0,1000,600);
 	
 	ctx.fillStyle="#FF0";
@@ -55,8 +55,10 @@ function clear(ctx,i){
 	}
 }
 function fly(){
-	setTimeout(function(){
-		flyH-=30;
+	if(stop==true){
+		stop=false;
+		start();
+	}else{
 		setTimeout(function(){
 			flyH-=30;
 			setTimeout(function(){
@@ -65,11 +67,15 @@ function fly(){
 					flyH-=30;
 					setTimeout(function(){
 						flyH-=30;
+						setTimeout(function(){
+							flyH-=30;
+						},5);
 					},5);
 				},5);
 			},5);
 		},5);
-	},5);
+	}
+	
 	
 }
 function showFly(ctx,h){
@@ -112,9 +118,18 @@ function go(ctx,i){
 }
 var canvas=document.getElementById('main');
 var ctx=canvas.getContext("2d");
-ctx.fillStyle="#cff";
-ctx.fillRect(0,0,1000,600);
-go(ctx,1);
+function start(){
+	flyH=300;
+	flyW=500;
+	ran1=Math.round(Math.random()*200-100);
+	ran2=Math.round(Math.random()*200-100);
+	e1=3;
+	e2=13;
+	ctx.fillStyle="#333";
+	ctx.fillRect(0,0,1000,600);
+	go(ctx,1);
+}
+start();
 
 </script>
 </body>
