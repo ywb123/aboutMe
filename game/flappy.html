@@ -9,7 +9,7 @@ body{
 </style>
 </head>
 <body>
-<canvas id="main" width='1000' height='600' onclick="fly()"></canvas> 
+<canvas id="main" width='1000' height='600' onclick="fly();"></canvas> 
 <img id="mm" src='mm.png' style="display:none;"></img>
 <script>
 var flyH=300;
@@ -76,8 +76,6 @@ function fly(){
 			},5);
 		},5);
 	}
-	
-	
 }
 function showFly(ctx,h){
 	ctx.fillStyle="#6F6";
@@ -133,7 +131,12 @@ function start(){
 	go(ctx,1);
 }
 start();
-
+function keyDown(){
+	if(event.keyCode == 32){
+		fly();
+	}
+}
+document.onkeydown = keyDown;
 </script>
 </body>
 </html>
