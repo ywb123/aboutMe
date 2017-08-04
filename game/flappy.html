@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>M</title>
+<style>
+body{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<canvas id="main" width='1000' height='600' onclick="fly()"></canvas> 
+<script>
+var flyH=300;
+var flyW=500;
+var ran1=Math.round(Math.random()*200-100);
+var ran2=Math.round(Math.random()*200-100);
+var e1=3;
+var e2=13;
+var stop=false;
+function circle(ctx,i){
+	//ctx.scale(i,i);
+	ctx.beginPath();
+	ctx.arc(200,650-i*20-1.4*i*i,i*1,0,Math.PI*2,false);
+	ctx.arc(200,660-i*20-1.2*i*i,i*1,0,Math.PI*2,false);
+	ctx.arc(200,670-i*20-1*i*i,i*1,0,Math.PI*2,false);
+	ctx.closePath();
+	ctx.fillStyle="rgba(255,100,100,0.5)";
+	ctx.fill();
+}
+
+function clear(ctx,i){
+	ctx.fillStyle="#cff";
+	ctx.fillRect(0,0,1000,600);
+	
+	ctx.fillStyle="#FF0";
+	ctx.fillRect(-50*e1+1000,0,50,150-ran1);
+	ctx.fillRect(-50*e1+1000,450-ran1,50,150+ran1);
+	
+	ctx.fillRect(-50*e2+1000,0,50,150-ran2);
+	ctx.fillRect(-50*e2+1000,450-ran2,50,150+ran2);
+	
+	var leftTop1=((flyW-25)<(1000-50*e1+50) && (flyW-25)>(1000-50*e1) && (150-ran1)>(flyH-25));
+	var rightTop1=((flyW+25)<(1000-50*e1+50) && (flyW+25)>(1000-50*e1) && (150-ran1)>(flyH-25));
+	var leftBottom1=((flyW-25)<(1000-50*e1+50) && (flyW-25)>(1000-50*e1) && (450-ran1)<(flyH+25));
+	var rightBottom1=((flyW+25)<(1000-50*e1+50) && (flyW+25)>(1000-50*e1) && (450-ran1)<(flyH+25));
+	
+	var leftTop2=((flyW-25)<(1000-50*e2+50) && (flyW-25)>(1000-50*e2) && (150-ran2)>(flyH-25));
+	var rightTop2=((flyW+25)<(1000-50*e2+50) && (flyW+25)>(1000-50*e2) && (150-ran2)>(flyH-25));
+	var leftBottom2=((flyW-25)<(1000-50*e2+50) && (flyW-25)>(1000-50*e2) && (450-ran2)<(flyH+25));
+	var rightBottom2=((flyW+25)<(1000-50*e2+50) && (flyW+25)>(1000-50*e2) && (450-ran2)<(flyH+25));
+	
+	if(leftTop1==true || rightTop1==true || leftTop2==true || rightTop2==true || leftBottom1 || rightBottom1 || leftBottom2 || rightBottom2){
+		stop=true;
+	}
+}
+function fly(){
+	setTimeout(function(){
+		flyH-=30;
+		setTimeout(function(){
+			flyH-=30;
+			setTimeout(function(){
+				flyH-=30;
+				setTimeout(function(){
+					flyH-=30;
+					setTimeout(function(){
+						flyH-=30;
+					},5);
+				},5);
+			},5);
+		},5);
+	},5);
+	
+}
+function showFly(ctx,h){
+	ctx.fillStyle="#6F6";
+	ctx.fillRect(flyW-25,h-25,50,50);
+}
+function go(ctx,i){
+	setTimeout(function(){
+		clear(ctx,i);
+		circle(ctx,i);
+		showFly(ctx,flyH);
+		flyH++;
+		i+=0.02;
+		e1+=0.02;
+		e2+=0.02;
+		if(i>=20){
+			i=1;
+		}
+		if(e1>=20){
+			e1=1;
+			ran1=Math.round(Math.random()*200-100);
+		}
+		if(e2>=20){
+			e2=1;
+			ran2=Math.round(Math.random()*200-100);
+		}
+		if(stop==true){
+			ctx.fillStyle="rgba(255,255,255,0.5)";
+			ctx.fillRect(0,0,1000,600);
+			//设置字体样式
+			ctx.font = "60px Courier New";
+			//设置字体填充颜色
+			ctx.fillStyle = "#0F0";
+			//从坐标点(50,50)开始绘制文字
+			ctx.fillText("OVER", 450, 200);
+		}else{
+			go(ctx,i);
+		}
+	},5);
+}
+var canvas=document.getElementById('main');
+var ctx=canvas.getContext("2d");
+ctx.fillStyle="#cff";
+ctx.fillRect(0,0,1000,600);
+go(ctx,1);
+
+</script>
+</body>
+</html>
