@@ -10,6 +10,7 @@ body{
 </head>
 <body>
 <canvas id="main" width='1000' height='600' onclick="fly()"></canvas> 
+<img id="mm" src='mm.png' style="display:none;"></img>
 <script>
 var flyH=300;
 var flyW=500;
@@ -80,7 +81,8 @@ function fly(){
 }
 function showFly(ctx,h){
 	ctx.fillStyle="#6F6";
-	ctx.fillRect(flyW-25,h-25,50,50);
+	ctx.drawImage(mm,flyW-25,h-25,50,50);
+	//ctx.fillRect(flyW-25,h-25,50,50);
 }
 function go(ctx,i){
 	setTimeout(function(){
@@ -117,6 +119,7 @@ function go(ctx,i){
 	},5);
 }
 var canvas=document.getElementById('main');
+var mm=document.getElementById('mm');
 var ctx=canvas.getContext("2d");
 function start(){
 	flyH=300;
