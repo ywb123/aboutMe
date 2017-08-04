@@ -19,6 +19,7 @@ var ran2=Math.round(Math.random()*200-100);
 var e1=3;
 var e2=13;
 var stop=false;
+var count=0;
 function circle(ctx,i){
 	//ctx.scale(i,i);
 	ctx.beginPath();
@@ -51,6 +52,12 @@ function clear(ctx,i){
 	var leftBottom2=((flyW-25)<(1000-50*e2+50) && (flyW-25)>(1000-50*e2) && (450-ran2)<(flyH+25));
 	var rightBottom2=((flyW+25)<(1000-50*e2+50) && (flyW+25)>(1000-50*e2) && (450-ran2)<(flyH+25));
 	
+	//设置字体样式
+	ctx.font = "40px Courier New";
+	//设置字体填充颜色
+	ctx.fillStyle = "#0F0";
+	//从坐标点(50,50)开始绘制文字
+	ctx.fillText(count, 10, 35 );
 	if(leftTop1==true || rightTop1==true || leftTop2==true || rightTop2==true || leftBottom1 || rightBottom1 || leftBottom2 || rightBottom2){
 		stop=true;
 	}
@@ -95,10 +102,12 @@ function go(ctx,i){
 			i=1;
 		}
 		if(e1>=20){
+			count++;
 			e1=1;
 			ran1=Math.round(Math.random()*200-100);
 		}
 		if(e2>=20){
+			count++;
 			e2=1;
 			ran2=Math.round(Math.random()*200-100);
 		}
@@ -126,6 +135,7 @@ function start(){
 	ran2=Math.round(Math.random()*200-100);
 	e1=3;
 	e2=13;
+	count=0;
 	ctx.fillStyle="#333";
 	ctx.fillRect(0,0,1000,600);
 	go(ctx,1);
